@@ -1,0 +1,184 @@
+.config-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.config-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.config-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.config-panel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.config-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.config-panel h2 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  /* 移除整体容器边框，让每个label自己有边框 */
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 保持原生radio和文本的间距 */
+  cursor: pointer;
+  padding: 0.75rem 1rem; /* 增加内边距使label更像按钮 */
+  border-radius: 8px; /* 圆角 */
+  border: 2px solid #e0e0e0; /* 默认边框 */
+  background: white; /* 默认背景 */
+  transition: all 0.2s; /* 平滑过渡 */
+  color: #333; /* 默认文字颜色 */
+}
+
+.radio-label:hover {
+  background-color: #f0f0ff; /* 悬停背景 */
+  border-color: #667eea; /* 悬停边框颜色 */
+}
+
+.radio-label input[type="radio"] {
+  /* 隐藏原生 radio 按钮 */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-label input[type="radio"]:checked + span {
+  /* 选中时span的样式，移除背景色 */
+  background: transparent; /* 确保没有背景 */
+  color: #667eea; /* 选中时文字颜色改为主题色 */
+  box-shadow: none; /* 移除阴影，因为背景没了 */
+  font-weight: 600;
+}
+
+.radio-label span {
+  /* span作为视觉上的按钮内容 */
+  display: block; /* 让span占据可用空间 */
+  flex-grow: 1; /* 填充剩余空间，使文本左对齐 */
+  text-align: left; /* 文本左对齐 */
+  padding: 0; /* 移除span的默认padding */
+  border-radius: 0;
+  transition: none; /* 颜色和字重变化通过:checked+span处理 */
+  color: inherit; /* 继承label的文字颜色 */
+  font-size: 0.95rem; /* 保持字体大小 */
+}
+
+/* 选中时label的边框和背景 */
+.radio-label:has(input[type="radio"]:checked) {
+  border-color: #667eea; /* 选中时label的边框颜色 */
+  background: #f0f0ff; /* 选中时label的背景色 */
+}
+
+.day-selector {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.day-button {
+  padding: 0.75rem 0.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.day-button:hover {
+  border-color: #667eea;
+  background: #f0f0ff;
+}
+
+.day-button.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+}
+
+.calculate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1rem;
+}
+
+.calculate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.calculate-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .config-panel {
+    position: static;
+    max-height: none;
+  }
+
+  .day-selector {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
