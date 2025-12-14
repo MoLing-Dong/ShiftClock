@@ -115,7 +115,18 @@ export function Calendar({ schedule, startDate, scheduleConfig }: CalendarProps)
         // 如果当天有工作班次，优先显示工作状态，即使也有休息日标记
         if (hasWorkShiftStartingOnThisDay || hasWorkShiftEndingOnThisDay) {
             // 有工作班次，优先显示工作状态
-            primaryType = 'work';
+            // 特殊逻辑：无休息日模式下，如果下班时间在12点之前，显示为休息日icon
+            if (scheduleConfig?.restDayType === 'none' && workShiftEndDisplay !== null) {
+                // 检查下班时间是否在同一天且在12点之前
+                const endTime: Date = workShiftEndDisplay;
+                if (isSameDay(endTime, date) && endTime.getHours() < 12) {
+                    primaryType = 'weekend';
+                } else {
+                    primaryType = 'work';
+                }
+            } else {
+                primaryType = 'work';
+            }
         } else if (hasWeekendShift) {
             // 没有工作班次，但有休息日标记，显示为休息日
             primaryType = 'weekend';
